@@ -1,25 +1,17 @@
-div(ng-include='"components/navbar/navbar.html"')
-
-header#banner.hero-unit
-  .container
-    h1 'Allo, 'Allo!
-    p.lead Kick-start your next web app with Angular Fullstack
-    img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
-
-.container
-  .row
-    .col-lg-12
-      h1.page-header Features:
-      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in awesomeThings')
+div.page-wrapper#main
+  div#banner.clearfix
+    div.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-8.col-sm-offset-2
+      ul.user-nav
         li
-          a(href='#', tooltip='{{thing.info}}')
-            | {{thing.name}}
-
-footer.footer
-  .container
-    p
-      | Angular Fullstack v2.1.1
-      = ' | '
-      a(href='https://twitter.com/tyhenkel') @tyhenkel
-      = ' | '
-      a(href='https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open') Issues
+          a(href='/login') Login
+        li
+          a(href='signup') Register
+      div.col-lg-4.col-lg-offset-4.col-md-4.col-md-offset-4.col-sm-4.col-sm-offset-4
+        div#leader
+          h1.brand Reveler
+          h2 Come and join us.  Your friends are waiting. 
+        form.search-box(name="search")
+          input.search-box(type="text")
+          button(type="button") Search
+div(ng-include="'components/footer/footer.html'")
+  

@@ -3,17 +3,77 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 @import 'font-awesome/scss/font-awesome';
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,800,300);
+@import url(http://fonts.googleapis.com/css?family=Oxygen);
+
+// app-wide variables
+$open-sans: 'Open Sans', sans-serif;
+$oxygen: 'Oxygen', sans-serif;
+
 
 /**
  * App-wide Styles
  */
 
-.browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+
+html, body {
+  height: 100%;
+  min-height: 100%;
 }
+
+body {
+  font-size: 1em;
+  font-family: $open-sans;
+}
+
+
+
+.state-wrapper, .page-wrapper {
+  height: 100%;
+  min-height: 100%;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+
+.user-nav {
+  list-style-type: none;
+  color: black;
+  float: right;
+  li {
+    font-size: 1.5em;
+    display: inline;
+    a {
+      padding: 0 20px;
+      color: black;
+    }
+    &:first-child {
+      border-right: 1px solid black;
+    }
+  }
+}
+
+
+.search-box {
+  input {
+    width: 80%;
+    color: black;
+    height: 30px;
+  }
+  button {
+    width: 20%;
+    height: 30px;
+    color: black;
+  }
+}
+
+
+
 
 // Component styles are injected through grunt
 // injector
