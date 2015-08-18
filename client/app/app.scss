@@ -33,6 +33,12 @@ body {
   min-height: 100%;
 }
 
+.brand {
+  font-family: $oxygen;
+  font-size: 3em;
+  letter-spacing: 0.05em;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -61,8 +67,8 @@ body {
 
 .search-box {
   input {
-    width: 80%;
     color: black;
+    width: 80%;
     height: 30px;
   }
   button {
@@ -80,5 +86,6 @@ body {
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
 @import 'main/main.scss';
+@import 'search/search.scss';
 @import 'modal/modal.scss';
 // endinjector
