@@ -1,10 +1,11 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./revel.controller');
+var controller = require('./yelp.controller');
 
 var router = express.Router();
 
-router.get('/:location', controller.show);
+router.get('/location/:location', controller.show);
+
 
 module.exports = router;

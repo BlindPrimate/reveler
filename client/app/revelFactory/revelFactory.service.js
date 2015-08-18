@@ -9,7 +9,7 @@ angular.module('revelerApp')
     // Public API here
     return {
       getRevels: function (location) {
-        return $http.get('/api/revels/' + location);
+        return $http.get('/api/yelp/location/' + location);
       }
     };
   });
