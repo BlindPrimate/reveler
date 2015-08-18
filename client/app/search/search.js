@@ -4,7 +4,7 @@ angular.module('revelerApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('search', {
-        url: '/search/:term',
+        url: '/search/:searchTerm',
         templateUrl: 'app/search/search.html',
         controller: 'SearchCtrl'
       });

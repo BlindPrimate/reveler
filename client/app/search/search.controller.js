@@ -3,10 +3,10 @@
 angular.module('revelerApp')
   .controller('SearchCtrl', function ($scope, $state, revelFactory) {
 
-    revelFactory.getRevels("willoughby,oh").success(function (data) {
+    console.log($state.params.searchTerm);
+    revelFactory.getRevels($state.params.searchTerm).success(function (data) {
       $scope.revels = data;
     });
 
 
-
-  });
+    });

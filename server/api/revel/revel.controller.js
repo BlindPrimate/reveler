@@ -16,7 +16,6 @@ var baseUrl = "http://api.yelp.com/v2/search";
 
 exports.show = function(req, res) {
 
-
   var parameters = {
     category_filter: "nightlife",
     location: req.params.location,
@@ -40,7 +39,6 @@ exports.show = function(req, res) {
   var urlParams = qs.stringify(parameters);
   var apiUrl = baseUrl + '?' + urlParams;
 
-
   request({
     method: 'GET',
     url: apiUrl,
@@ -49,13 +47,6 @@ exports.show = function(req, res) {
     if (error) { return handleError(response, error); }
     res.status(200).json(json);
   });
-
-  //request(apiUrl ,function(error, response, body) {
-    //if (error) { return handleError(response, error); }
-    //console.log(typeof response);
-    //var jsonData = JSON.parse(body);
-    //res.status(200).json(jsonData);
-  //});
 
 };
 
