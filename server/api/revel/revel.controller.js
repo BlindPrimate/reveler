@@ -39,13 +39,32 @@ exports.show = function(req, res) {
   var urlParams = qs.stringify(parameters);
   var apiUrl = baseUrl + '?' + urlParams;
 
+
+  // retrieve Yelp data
   request({
     method: 'GET',
     url: apiUrl,
     json: true
-  }, function(error, response, json) {
+  }, function(error, response, yelpData) {
     if (error) { return handleError(response, error); }
-    res.status(200).json(json);
+
+    // db call for all checkins
+    Revel.find(function (err, revels) {
+      if(err) { return (err, revels); }
+      // cross reference checkins with yelp api location data
+      yelpData.businesses = yelpData.businesses.map(function(business) {
+        for (var i = 0; i < revels.length; i++) {
+          if (revels[i].revel_id === business.id)  {
+            business.checkins = revels[i].checkins;
+            break;
+          } else {
+            business.checkins = 0;
+          }      
+        }
+        return business;
+      });
+    res.status(200).json(yelpData);
+    });
   });
 
 };

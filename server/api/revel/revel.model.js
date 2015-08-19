@@ -4,9 +4,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var RevelSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  revel_id: String,
+  checkins: Number
 });
 
 module.exports = mongoose.model('Revel', RevelSchema);

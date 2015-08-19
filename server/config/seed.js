@@ -6,6 +6,7 @@
 'use strict';
 
 var User = require('../api/user/user.model');
+var Revel = require('../api/revel/revel.model');
 
 User.find({}).remove(function() {
   User.create({
@@ -24,3 +25,18 @@ User.find({}).remove(function() {
     }
   );
 });
+
+Revel.find({}).remove(function () {
+  Revel.create({
+    revel_id: "the-captains-club-eastlake",
+    checkins: 20
+  }, {
+    revel_id: "the-wild-goose-willoughby",
+    checkins: 20
+    }
+    ), function() {
+      console.log('finished populating revels');
+    };
+})
+
+
