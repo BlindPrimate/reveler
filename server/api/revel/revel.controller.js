@@ -1,12 +1,12 @@
 'use strict';
 
+
 var _ = require('lodash');
 var oauthSignature = require('oauth-signature')
 var n = require('nonce')();
 var request = require('request');
 var qs = require('querystring');
-var _ = require('lodash');
-
+var Revel = require('./revel.model');
 
 var baseUrl = "http://api.yelp.com/v2/search";
 
