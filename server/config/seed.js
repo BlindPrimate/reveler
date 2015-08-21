@@ -28,11 +28,13 @@ User.find({}).remove(function() {
 
 Revel.find({}).remove(function () {
   Revel.create({
-    revel_id: "the-captains-club-eastlake",
-    checkins: 20
-  }, {
-    revel_id: "the-wild-goose-willoughby",
-    checkins: 20
+      revel_id: "the-captains-club-eastlake",
+      checkins: 20,
+      revelers: []
+    } , {
+      revel_id: "the-wild-goose-willoughby",
+      checkins: 20,
+      revelers: []
     }
     ), function() {
       console.log('finished populating revels');

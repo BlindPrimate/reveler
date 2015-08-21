@@ -1,30 +1,20 @@
 'use strict';
 
 angular.module('revelerApp')
-  .controller('SearchCtrl', function ($scope, $state, revelFactory) {
+  .controller('SearchCtrl', function ($scope, $state, Auth, revelFactory) {
+
+    var currUsrId = Auth.getCurrentUser()._id;
+
 
     revelFactory.getRevels($state.params.searchTerm).success(function(revels) {
       $scope.revels = revels;
     });
 
     $scope.checkIn = function (revelObj) {
-      revelFactory.updateRevel(revelObj, function (response) {
-        angular.forEach($scope.revels.businesses, function (revel) {
-        //$scope.revels = $scope.revels.map(function (revel) {
-          if (revel.db_id === response._id) {
-            revel.checkins += 1;
-            return revel;
-          } else {
-            return revel;
-          }
-        })
+      revelFactory.updateRevel(revelObj, currUsrId, function (updatedRevel) {
+        revelObj.db_id = updatedRevel._id;
+        revelObj.revelers = updatedRevel.revelers;
       });
-      //revelFactory.getRevel(revel_id).success(function(revel) {
-        //revel.checkins += 1;
-        //revelFactory.updateRevel(revel._id, revel.revel_name, revel).success(function (postedRevel) {
-          
-        //})
-      //});
     }
 
 

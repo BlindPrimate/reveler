@@ -51,20 +51,43 @@ exports.search = function(req, res) {
     // db call for all checkins
     Revel.find(function (err, revels) {
       if(err) { return (err, revels); }
-      // cross reference checkins with yelp api location data
-      yelpData.businesses = yelpData.businesses.map(function(business) {
-        for (var i = 0; i < revels.length; i++) {
-          if (revels[i].revel_id === business.id)  {
-            business.checkins = revels[i].checkins;
-            business.db_id = revels[i]._id
-            break;
-          } else {
-            business.checkins = 0;
-            business.db_id = '';
-          }      
-        }
-        return business;
-      });
+
+      if (revels.length < 1) {
+        yelpData.businesses = yelpData.businesses.map(function(business) {
+          business.db_id = '';
+          business.revelers = [];
+        });
+      } else {
+        yelpData.businesses = yelpData.businesses.map(function(business) {
+          for (var i = 0; i < revels.length; i++) {
+            if (revels[i].revel_id === business.id)  {
+              business.db_id = revels[i]._id;
+              business.revelers = revels[i].revelers;
+              break;
+            } else {
+              business.db_id = '';
+              business.revelers = [];
+            }      
+          }
+          return business;
+        });
+      }
+
+      // combines checkins with yelp api location data
+      //yelpData.businesses = yelpData.businesses.map(function(business) {
+          //for (var i = 0; i < revels.length; i++) {
+            //if (revels[i].revel_id === business.id)  {
+              //business.db_id = revels[i]._id;
+              //business.revelers = revels[i].revelers;
+              //break;
+            //} else {
+              //business.db_id = '';
+              //business.revelers = [];
+            //}      
+          //}
+          //return business;
+        //}
+      //});
     res.status(200).json(yelpData);
     });
   });

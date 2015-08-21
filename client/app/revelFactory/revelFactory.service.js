@@ -14,25 +14,34 @@ angular.module('revelerApp')
       getRevel: function (revel_id) {
         return $http.get('/api/revels/' + revel_id);
       },
-      //updateRevel: function (revel_id, locationName, updatedRevel) {
-        //return $http.put('api/revels/' + revel_id, updatedRevel);
-      //},
-      updateRevel: function (revelObj, callbackFn) {
+      updateRevel: function (revelObj, user_id, callbackFn) {
+
+        var userIdIndex = revelObj.revelers.indexOf(user_id);
+
+        var newRevel = {
+            revel_id: revelObj.id, 
+            revelers: [user_id]
+        }
+
         if (!revelObj.db_id) {
+          $http.post('api/revels/', newRevel).success(function (postedRevel) {
+            callbackFn(postedRevel);
+          });
+        } else if (userIdIndex !== -1) {
           $http.get('/api/revels/' + revelObj.db_id).success(function(revel) {
-            $http.post('api/revels/', {revel_id: revelObj.id, checkins: 1}).success(function (postedRevel) {
+            revel.revelers.splice(userIdIndex, 1);
+            $http.put('api/revels/' + revelObj.db_id, revel).success(function (postedRevel) {
               callbackFn(postedRevel);
-            })
-          }); 
+            });
+          });
         } else {
           $http.get('/api/revels/' + revelObj.db_id).success(function(revel) {
-            revel.checkins += 1;
+            revel.revelers.push(user_id);
             $http.put('api/revels/' + revelObj.db_id, revel).success(function (postedRevel) {
               callbackFn(postedRevel);
             });
           });
         }
-      },
-      
+      }
     };
   });
