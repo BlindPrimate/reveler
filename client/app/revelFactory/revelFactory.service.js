@@ -1,20 +1,28 @@
 'use strict';
 
 angular.module('revelerApp')
-  .factory('revelFactory', function ($http) {
+  .factory('revelFactory', function ($resource, $stateParams) {
     // Service logic
-    // ...
+    // ... 
+    var Search = $resource('api/revels/search/:location');
 
+    var Revel = $resource('api/revels/:id', 
+      {
+        id: "@id"
+      }, 
+      {
+        update: { method: 'PUT' }
+      }
+    );
 
     // Public API here
     return {
-      getRevels: function (location) {
-        return $http.get('/api/revels/search/' + location);
+      getRevels: function (callback) {
+        Search.get( {location: $stateParams.searchTerm }, function (res) {
+          callback(res);
+        });
       },
-      getRevel: function (revel_id) {
-        return $http.get('/api/revels/' + revel_id);
-      },
-      updateRevel: function (revelObj, user_id, callbackFn) {
+      updateRevel: function (revelObj, user_id, callback) {
 
         var userIdIndex = revelObj.revelers.indexOf(user_id);
 
@@ -23,23 +31,27 @@ angular.module('revelerApp')
             revelers: [user_id]
         }
 
-        if (!revelObj.db_id) {
-          $http.post('api/revels/', newRevel).success(function (postedRevel) {
-            callbackFn(postedRevel);
-          });
-        } else if (userIdIndex !== -1) {
-          $http.get('/api/revels/' + revelObj.db_id).success(function(revel) {
-            revel.revelers.splice(userIdIndex, 1);
-            $http.put('api/revels/' + revelObj.db_id, revel).success(function (postedRevel) {
-              callbackFn(postedRevel);
+        // checks if selected revel has any checkins creates new revel if not
+        if (revelObj.db_id) {
+          var revel = Revel.get({ id: revelObj.db_id });
+          if (userIdIndex !== -1) {
+            revel.$promise.then(function (revel) {
+              revel.revelers.splice(userIdIndex, 1);
+              revel.$update( {id: revelObj.db_id}, function (res) {
+                callback(res);
+              });
             });
-          });
+          } else {
+            revel.$promise.then(function (revel) {
+              revel.revelers.push(user_id);
+              revel.$update( {id: revelObj.db_id}, function (res) {
+                callback(res);
+              });
+            });
+          }
         } else {
-          $http.get('/api/revels/' + revelObj.db_id).success(function(revel) {
-            revel.revelers.push(user_id);
-            $http.put('api/revels/' + revelObj.db_id, revel).success(function (postedRevel) {
-              callbackFn(postedRevel);
-            });
+          Revel.save(newRevel, function (res) {
+            callback(res);
           });
         }
       }

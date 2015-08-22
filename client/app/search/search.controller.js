@@ -5,10 +5,13 @@ angular.module('revelerApp')
 
     var currUsrId = Auth.getCurrentUser()._id;
 
-
-    revelFactory.getRevels($state.params.searchTerm).success(function(revels) {
+    revelFactory.getRevels(function (revels) {
       $scope.revels = revels;
     });
+
+    //revelFactory.getRevels($state.params.searchTerm).success(function(revels) {
+      //$scope.revels = revels;
+    //});
 
     $scope.checkIn = function (revelObj) {
       revelFactory.updateRevel(revelObj, currUsrId, function (updatedRevel) {
