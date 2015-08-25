@@ -6,16 +6,15 @@ angular.module('revelerApp')
     var currUsrId = Auth.getCurrentUser()._id;
 
 
-    Revel.getRevels().then(function(revels) {
-      $scope.revels = revels;
+    Revel.getRevels().then(function(res) {
+      $scope.revels = res;
     });
 
 
     $scope.checkIn = function (revelObj) {
-      //console.log(Revel.updateRevel(revelObj, currUsrId));
-      Revel.updateRevel(revelObj, currUsrId).then(function (updatedRevel) { 
-        revelObj.db_id = updatedRevel._id;
-        revelObj.revelers = updatedRevel.revelers;
+      Revel.updateRevel(revelObj, currUsrId).then(function (res) { 
+        revelObj.db_id = res._id;
+        revelObj.revelers = res.revelers;
       });
     }
 

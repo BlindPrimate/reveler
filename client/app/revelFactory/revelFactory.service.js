@@ -7,6 +7,7 @@ angular.module('revelerApp')
 
     var baseUrl = 'api/revels/'
 
+
     var revel = this;
 
     // all revels
@@ -35,18 +36,18 @@ angular.module('revelerApp')
       return defer.promise;
     }
 
-    
-    revel.updateRevel = function (revelObj, user_id) {
+    // check in / check out of target revel location
+    revel.updateRevel = function (revelObj, currUsr) {
       var defer = $q.defer();
-      var userIdIndex = revelObj.revelers.indexOf(user_id);
+      var userIdIndex = revelObj.revelers.indexOf(currUsr);
       var revelId = revelObj.db_id;
       var newRevel = {
           revel_id: revelObj.id, 
-          revelers: [user_id]
+          revelers: [currUsr]
       }
       
       // return error if not logged in
-      if (!user_id) {
+      if (!currUsr) {
         defer.reject('User not Logged In');
         console.error("User not Logged In");
         return defer.promise;
@@ -65,7 +66,7 @@ angular.module('revelerApp')
       } else {    // if db entry exists, checkin/checkout based on current user status
         return revel.getRevel(revelId).then(function (oldRevel) {
           if (userIdIndex === -1) {
-            oldRevel.revelers.push(user_id);
+            oldRevel.revelers.push(currUsr);
           } else {
             oldRevel.revelers.splice(userIdIndex, 1);
           }
