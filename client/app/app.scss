@@ -50,22 +50,23 @@ body {
 .user-nav {
   list-style-type: none;
   color: black;
-  float: right;
+  padding-top: 15px;
   li {
-    font-size: 1.5em;
-    display: inline;
+    font-size: 1.2em;
+    border-left: 1px solid black;
     a {
       padding: 0 20px;
       color: black;
     }
     &:first-child {
-      border-right: 1px solid black;
+      border-left: none;
     }
   }
 }
 
 
 .search-box {
+  margin-top: 10px;
   input {
     color: black;
     width: 80%;
