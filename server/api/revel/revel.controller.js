@@ -7,6 +7,7 @@ var n = require('nonce')();
 var request = require('request');
 var qs = require('querystring');
 var Revel = require('./revel.model');
+var async = require('async');
 
 var baseUrl = "http://api.yelp.com/v2/search";
 
@@ -40,7 +41,7 @@ exports.search = function(req, res) {
   var apiUrl = baseUrl + '?' + urlParams;
 
 
-  // retrieve Yelp data
+  // retrieve Yelp data and merge with local db revel checkins
   request({
     method: 'GET',
     url: apiUrl,
@@ -48,7 +49,7 @@ exports.search = function(req, res) {
   }, function(error, response, yelpData) {
     if (error) { return handleError(response, error); }
 
-    // db call for all checkins
+    //db call for all checkins
     Revel.find(function (err, revels) {
       if(err) { return (err, revels); }
 
@@ -72,22 +73,6 @@ exports.search = function(req, res) {
           return business;
         });
       }
-
-      // combines checkins with yelp api location data
-      //yelpData.businesses = yelpData.businesses.map(function(business) {
-          //for (var i = 0; i < revels.length; i++) {
-            //if (revels[i].revel_id === business.id)  {
-              //business.db_id = revels[i]._id;
-              //business.revelers = revels[i].revelers;
-              //break;
-            //} else {
-              //business.db_id = '';
-              //business.revelers = [];
-            //}      
-          //}
-          //return business;
-        //}
-      //});
     res.status(200).json(yelpData);
     });
   });

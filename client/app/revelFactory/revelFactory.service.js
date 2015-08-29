@@ -7,10 +7,9 @@ angular.module('revelerApp')
 
     var baseUrl = 'api/revels/'
 
-
     var revel = this;
 
-    // all revels
+    // get all revels
     revel.getRevels = function () {
       var defer = $q.defer();
       $http.get(baseUrl + 'search/' + $stateParams.searchTerm)
@@ -23,7 +22,7 @@ angular.module('revelerApp')
       return defer.promise;
     }
 
-    // single revel 
+    // get single revel 
     revel.getRevel = function (revelId) {
       var defer = $q.defer();
       $http.get(baseUrl + revelId)

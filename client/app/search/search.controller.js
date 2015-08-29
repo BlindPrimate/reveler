@@ -3,8 +3,14 @@
 angular.module('revelerApp')
   .controller('SearchCtrl', function ($scope, $state, Auth, Revel) {
 
+    var init = function() {
+      $scope.isCheckedIn = false;
+    }
+
     var currUsrId = Auth.getCurrentUser()._id;
 
+
+    
 
     Revel.getRevels().then(function(res) {
       $scope.revels = res;
@@ -18,5 +24,6 @@ angular.module('revelerApp')
       });
     }
 
+    init();
 
   });
