@@ -141,6 +141,35 @@ angular.module('revelerApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
-      }
+      },
+      changeCurrUserRevel: function (revelObj) {
+        var userId = currentUser._id;
+        var currUserRevel = currentUser.currRevel;
+        var defer = $q.defer();
+
+        
+
+
+        $http.put('/api/users/checkin/' + userId + '/' + revelObj.db_id, newRevelId)
+          .success(function (newRevel) {
+            defer.resolve(newRevel);
+          })
+          .error(function (err) {
+            defer.reject(err);
+          });
+          return defer.promise;
+        },
+        getCurrUserRevel: function () {
+          var userId = currentUser._id;
+          var defer = $q.defer();
+          $http.get('/api/users/checkin/' + userId)
+            .success(function (currRevel) {
+              defer.resolve(currRevel);
+            })
+            .error(function (err) {
+              defer.reject(err);
+            });
+          return defer.promise;
+        }
     };
   });

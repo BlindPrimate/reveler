@@ -4,6 +4,27 @@ angular.module('revelerApp')
   .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
     $scope.user = {};
     $scope.errors = {};
+    
+
+    //  delete 
+    $scope.autoLogin = function () {
+      $scope.submitted = true;
+
+      Auth.login({
+        email: 'test@test.com',
+        password: 'test'
+      })
+      .then( function() {
+        // Logged in, redirect to home
+        $location.path('/');
+      })
+      .catch( function(err) {
+        $scope.errors.other = err.message;
+      });
+    }   
+    
+    
+    //
 
     $scope.login = function(form) {
       $scope.submitted = true;

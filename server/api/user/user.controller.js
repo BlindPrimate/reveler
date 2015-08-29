@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('./user.model');
+var Revel = require('../revel/revel.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -79,7 +80,33 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
-/**
+exports.changeCurrentCheckIn = function (req, res, next) {
+  var userId = req.user._id;
+  var revelId = req.params.revelId;
+  var currRevel = req.body;
+
+    User.findOne({
+    _id: userId
+  }, '-salt -hashedPassword', function(err, user) {
+    if (err) return next(err);
+    if (!user) return res.status(401).send('Unauthorized');
+    user.currRevel = currRevel;
+    user.save();
+    res.json(currRevel);
+  });
+}
+
+exports.currentCheckIn = function (req, res, next) {
+  var userId = req.params.id;
+  User.findById(userId, function (err, user) {
+    if (err) return next(err);
+    if (!user) return res.status(401).send('Unauthorized');
+    res.json(user.currRevel);
+  });
+}
+
+
+/*
  * Get my info
  */
 exports.me = function(req, res, next) {
