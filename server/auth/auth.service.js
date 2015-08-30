@@ -8,6 +8,7 @@ var expressJwt = require('express-jwt');
 var compose = require('composable-middleware');
 var User = require('../api/user/user.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
+var passiveValidate = expressJwt({secret: config.secrets.session, credentialsRequired: false});
 
 /**
  * Attaches the user object to the request if authenticated
@@ -34,6 +35,40 @@ function isAuthenticated() {
       });
     });
 }
+
+/**
+ *  Adds user id to request if logged in
+ **/
+function addUserId() {
+  return compose()
+    // Validate jwt
+    .use(function(req, res, next) {
+      if(req.query && req.query.hasOwnProperty('access_token')) {
+        req.headers.authorization = 'Bearer ' + req.query.access_token;
+      }
+      passiveValidate(req, res, next);
+    })
+    // Attach user to request
+    .use(function(req, res, next) {
+      // if logged in add user info to request
+      if (req.user) {
+        User.findById(req.user._id, '-email -salt -hashedPassword', function (err, user) {
+          if (err) return next(err);
+
+          if (!user) {
+            req.user = null;
+          }
+          req.user = user;
+          next();
+        });
+      // if not logged in, return null
+      } else {
+        req.user = null;
+        next();
+      }
+    });
+}
+
 
 /**
  * Checks if the user role meets the minimum requirements of the route
@@ -74,3 +109,4 @@ exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
 exports.signToken = signToken;
 exports.setTokenCookie = setTokenCookie;
+exports.addUserId = addUserId;

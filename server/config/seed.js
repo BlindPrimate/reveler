@@ -16,7 +16,7 @@ User.find({}).remove(function() {
     email: 'test@test.com',
     password: 'test',
     currRevel: {
-      revel_id: "the-captains-club-eastlake",
+      revelId: "the-captains-club-eastlake",
       revelers: []
     }
   }, {
@@ -34,10 +34,10 @@ User.find({}).remove(function() {
 
 Revel.find({}).remove(function () {
   Revel.create({
-      revel_id: "the-captains-club-eastlake",
+      revelId: "the-captains-club-eastlake",
       revelers: []
     } , {
-      revel_id: "the-wild-goose-willoughby",
+      revelId: "the-wild-goose-willoughby",
       revelers: []
     }
     ), function() {

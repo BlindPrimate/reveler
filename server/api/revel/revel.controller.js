@@ -48,33 +48,30 @@ exports.search = function(req, res) {
     json: true
   }, function(error, response, yelpData) {
     if (error) { return handleError(response, error); }
+    if (req.user) {
+      var isReveling = targetRevel.revelers.indexOf(req.user._id) >= 0;
+    }
+    
 
-    //db call for all checkins
-    Revel.find(function (err, revels) {
-      if(err) { return (err, revels); }
-
-      if (revels.length < 1) {
-        yelpData.businesses = yelpData.businesses.map(function(business) {
-          business.db_id = '';
-          business.revelers = [];
-        });
-      } else {
-        yelpData.businesses = yelpData.businesses.map(function(business) {
-          for (var i = 0; i < revels.length; i++) {
-            if (revels[i].revel_id === business.id)  {
-              business.db_id = revels[i]._id;
-              business.revelers = revels[i].revelers;
-              break;
-            } else {
-              business.db_id = '';
-              business.revelers = [];
-            }      
-          }
-          return business;
-        });
-      }
-    res.status(200).json(yelpData);
+    async.map(yelpData.businesses, function (business, callback) {
+      Revel.findOne({revelId: business.id}, function (err, targetRevel) {
+        if (targetRevel && isReveling) {
+          business.revelData = targetRevel;
+          business.userCheckedIn = true;
+        } else if (targetRevel) {
+          business.revelData = targetRevel;
+          business.userCheckedIn = false;
+        } else {
+          business.revelData = null;
+          business.userCheckedIn = false;
+        }
+        callback(err, business);
+      });
+    }, function (err, data) {
+      console.log(data);
+      res.status(200).json(data);
     });
+
   });
 };
 
