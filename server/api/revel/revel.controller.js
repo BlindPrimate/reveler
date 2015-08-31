@@ -7,6 +7,7 @@ var n = require('nonce')();
 var request = require('request');
 var qs = require('querystring');
 var Revel = require('./revel.model');
+var User = require('../user/user.model');
 var async = require('async');
 
 var baseUrl = "http://api.yelp.com/v2/search";
@@ -48,29 +49,29 @@ exports.search = function(req, res) {
     json: true
   }, function(error, response, yelpData) {
     if (error) { return handleError(response, error); }
-    
 
     // yelp data combined with local db checkin data (revels)
     async.map(yelpData.businesses, function (business, callback) {
-      Revel.findOne({revelId: business.id}, '-__v', function (err, targetRevel) {
+      Revel.findOne({revelId: business.id}, '-__v').lean().exec(function (err, targetRevel) {
         var newRevel = {
           revelId: business.id,
           revelers: []
         }
+        console.log(targetRevel);
 
         if (req.user && targetRevel) {
           var isReveling = targetRevel.revelers.indexOf(req.user._id) >= 0;
         }
 
         if (targetRevel && isReveling) {     //  if exists in db & user checked in, 
-          business.revelData = targetRevel; 
-          business.userCheckedIn = true;
+          business.revelData = _.extend({}, targetRevel);
+          business.revelData.userCheckedIn = true;
         } else if (targetRevel) {           // if exists in db but user not checked in
-          business.revelData = targetRevel;
-          business.userCheckedIn = false;
+          business.revelData = _.extend({}, targetRevel);
+          business.revelData.userCheckedIn = false;
         } else {                            
           business.revelData = newRevel;
-          business.userCheckedIn = false;
+          business.revelData.userCheckedIn = false;
         }
         callback(err, business);  // async.map required callback
       });
@@ -92,6 +93,13 @@ exports.show = function(req, res) {
 
 // Creates a new revel checkin in the DB.
 exports.create = function(req, res) {
+  User.findById(req.user.id, function (err, user) {
+    if (err) { return handleError(res, err); }
+    user.currRevel = req.body;
+    user.save(function (err) {
+      if (err) { return handleError(res, err); }
+    });
+  });
   Revel.create(req.body, function(err, revel) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(revel);
@@ -110,8 +118,15 @@ exports.index = function(req, res) {
 
 // Updates an existing checkin in the DB.
 exports.update = function(req, res) {
-  console.log(req.body);
   if(req.body._id) { delete req.body._id; }
+  User.findById(req.user.id, function (err, user) {
+    if (err) { return handleError(res, err); }
+    user.currRevel = req.body;
+    user.save(function (err) {
+      if (err) { return handleError(res, err); }
+    });
+  });
+
   Revel.findById(req.params.id, function (err, revel) {
     if (err) { return handleError(res, err); }
     if(!revel) { return res.status(404).send('Not Found'); }

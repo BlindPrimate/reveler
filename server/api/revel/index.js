@@ -10,8 +10,8 @@ var router = express.Router();
 router.get('/search/:location', auth.addUserId(), controller.search);   // get yelp data merged with checkins
 router.get('/', controller.index);                                      // get list of checkins
 router.get('/:id', controller.show);                                    // get list of checkins
-router.post('/', controller.create);                                    // post new checkin
-router.put('/:id', controller.update);
+router.post('/', auth.addUserId(), controller.create);                                    // post new checkin
+router.put('/:id', auth.addUserId(), controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 

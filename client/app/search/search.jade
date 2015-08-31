@@ -1,7 +1,6 @@
 div.page-wrapper#search-page
   div(ng-include="'components/navbar/navbar.html'")
   div.col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1.col-sm-10.col-sm-offset-1
-    p {{isCheckedIn()}}
     ul.container
       li.revel(ng-repeat="revel in revels")
         h3 
@@ -11,6 +10,8 @@ div.page-wrapper#search-page
         p {{revel.phone}}
         div
           span {{revel.revelData.revelers.length}}
+        p(ng-if="revel.revelData.userCheckedIn") Checked In
+        p {{revel.revelData}}
         button(ng-click="checkIn(revel.revelData)") 
           span Check In
           span Check Out
