@@ -48,30 +48,35 @@ exports.search = function(req, res) {
     json: true
   }, function(error, response, yelpData) {
     if (error) { return handleError(response, error); }
-    if (req.user) {
-      var isReveling = targetRevel.revelers.indexOf(req.user._id) >= 0;
-    }
     
 
+    // yelp data combined with local db checkin data (revels)
     async.map(yelpData.businesses, function (business, callback) {
-      Revel.findOne({revelId: business.id}, function (err, targetRevel) {
-        if (targetRevel && isReveling) {
-          business.revelData = targetRevel;
+      Revel.findOne({revelId: business.id}, '-__v', function (err, targetRevel) {
+        var newRevel = {
+          revelId: business.id,
+          revelers: []
+        }
+
+        if (req.user && targetRevel) {
+          var isReveling = targetRevel.revelers.indexOf(req.user._id) >= 0;
+        }
+
+        if (targetRevel && isReveling) {     //  if exists in db & user checked in, 
+          business.revelData = targetRevel; 
           business.userCheckedIn = true;
-        } else if (targetRevel) {
+        } else if (targetRevel) {           // if exists in db but user not checked in
           business.revelData = targetRevel;
           business.userCheckedIn = false;
-        } else {
-          business.revelData = null;
+        } else {                            
+          business.revelData = newRevel;
           business.userCheckedIn = false;
         }
-        callback(err, business);
+        callback(err, business);  // async.map required callback
       });
-    }, function (err, data) {
-      console.log(data);
+    }, function (err, data) {    // map completed, final data returned
       res.status(200).json(data);
     });
-
   });
 };
 
@@ -105,6 +110,7 @@ exports.index = function(req, res) {
 
 // Updates an existing checkin in the DB.
 exports.update = function(req, res) {
+  console.log(req.body);
   if(req.body._id) { delete req.body._id; }
   Revel.findById(req.params.id, function (err, revel) {
     if (err) { return handleError(res, err); }

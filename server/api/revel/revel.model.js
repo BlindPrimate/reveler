@@ -5,7 +5,8 @@ var mongoose = require('mongoose'),
 
 var RevelSchema = new Schema({
   revelId: String,
-  revelers: Array
+  revelers: Array,
+  versionKey: false
 });
 
 module.exports = mongoose.model('Revel', RevelSchema);

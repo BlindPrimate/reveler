@@ -16,14 +16,13 @@ angular.module('revelerApp')
     }
 
 
-    //$scope.checkIn = function (revelObj) {
-      //Revel.updateRevel(revelObj, currUsrId).then(function (res) { 
-        //Auth.changeCurrUserRevel(revelObj).then(function (newRevel) {
-          //revelObj.db_id = res._id;
-          //revelObj.revelers = res.revelers;
-        //});
-      //});
-    //}
+
+    $scope.checkIn = function (revelObj) {
+      Revel.updateRevel(revelObj).then(function (res) { 
+        revelObj._id = res._id;
+        revelObj.revelers = res.revelers;
+      });
+    }
 
     init();
 

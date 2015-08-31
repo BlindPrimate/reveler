@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('revelerApp')
-  .factory('Revel', function ($q, $http, $stateParams) {
+  .factory('Revel', function ($q, $http, $stateParams, Auth) {
     // Service logic
     // ... 
 
@@ -36,50 +36,94 @@ angular.module('revelerApp')
     }
 
     // check in / check out of target revel location
-    revel.updateRevel = function (revelObj, currUsr) {
+    revel.updateRevel = function (revelObj) {
       var defer = $q.defer();
+      var currUsr = Auth.getCurrentUser()._id;
       var userIdIndex = revelObj.revelers.indexOf(currUsr);
-      var revelId = revelObj.db_id;
-      var newRevel = {
-          revel_id: revelObj.id, 
-          revelers: [currUsr]
+      var revelId = revelObj._id || '';
+      //var newRevel = {
+          //revel_id: revelObj._id, 
+          //revelers: [currUsr]
+      //}
+
+
+      if (userIdIndex === -1) {
+        revelObj.revelers.push(currUsr);
+      } else {
+        revelObj.revelers.splice(userIdIndex, 1);
       }
-      
-      // return error if not logged in
-      if (!currUsr) {
-        defer.reject('User not Logged In');
-        console.error("User not Logged In");
+
+      if (revelId) {
+        console.log('check');
+        $http.put(baseUrl + revelId, revelObj)
+          .success(function (res) {
+            defer.resolve(res);
+          })
+          .error(function (err, status) {
+            defer.reject(err);
+          });
+        return defer.promise;
+      } else {
+        $http.post(baseUrl + revelId, revelObj)
+          .success(function (res) {
+            defer.resolve(res);
+          })
+          .error(function (err, status) {
+            defer.reject(err);
+          });
         return defer.promise;
       }
 
-      //  checks user in or out based on current checkin status
-      if (!revelId) {   // if target revel doesn't exist in db, create it
-         $http.post(baseUrl, newRevel)
-           .success(function (res) {
-             defer.resolve(res);
-           })
-           .error(function (err, status) {
-             defer.reject(err);
-           });
-         return defer.promise;
-      } else {    // if db entry exists, checkin/checkout based on current user status
-        return revel.getRevel(revelId).then(function (oldRevel) {
-          if (userIdIndex === -1) {
-            oldRevel.revelers.push(currUsr);
-          } else {
-            oldRevel.revelers.splice(userIdIndex, 1);
-          }
+    
+      // return error if not logged in
+      //if (!currUsr) {
+        //defer.reject('User not Logged In');
+        //return defer.promise;
+      //}
 
-          $http.put(baseUrl + revelId, oldRevel)
-            .success(function (res) {
-              defer.resolve(res);
-            })
-            .error(function (err, status) {
-              defer.reject(err);
-            });
-          return defer.promise;
-        });
-      }
+        //checks user in or out based on current checkin status
+      //if (!revelId) {   // if target revel doesn't exist in db, create it
+         //$http.post(baseUrl, newRevel)
+           //.success(function (res) {
+             //defer.resolve(res);
+           //})
+           //.error(function (err, status) {
+             //defer.reject(err);
+           //});
+         //return defer.promise;
+      //} else {    // if db entry exists, checkin/checkout based on current user status
+        //return revel.getRevel(revelId).then(function (revel) {
+          //if (userIdIndex === -1) {
+            //revel.revelers.push(currUsr);
+          //} else {
+            //revel.revelers.splice(userIdIndex, 1);
+          //}
+
+          //$http.put(baseUrl + revelId, revel)
+            //.success(function (res) {
+              //defer.resolve(res);
+            //})
+            //.error(function (err, status) {
+              //defer.reject(err);
+            //});
+          //return defer.promise;
+        //});
+      //}
     }
+
+    revel.checkin = function (revelObj) {
+      var defer = $q.defer();
+      var userId = Auth.getCurrentUser()._id;
+      $http.put('/api/users/checkin/' + userId + '/' + revelObj._id, revelObj)
+        .success(function (newRevel) {
+          defer.resolve(newRevel);
+        })
+        .error(function (err) {
+          defer.reject(err);
+        });
+      return defer.promise;
+    }
+
+
     return revel;
   });
