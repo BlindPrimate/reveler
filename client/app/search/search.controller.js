@@ -12,9 +12,7 @@ angular.module('revelerApp')
     }
 
     $scope.checkIn = function (revelObj) {
-      Revel.updateRevel(revelObj).then(function (res) { 
-        angular.merge(revelObj, res);
-      });
+      Revel.toggleCheckinStatus(revelObj, $scope.revels);
     }
 
     init();

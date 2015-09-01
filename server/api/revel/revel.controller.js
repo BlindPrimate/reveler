@@ -57,7 +57,6 @@ exports.search = function(req, res) {
           revelId: business.id,
           revelers: []
         }
-        console.log(targetRevel);
 
         if (req.user && targetRevel) {
           var isReveling = targetRevel.revelers.indexOf(req.user._id) >= 0;
@@ -119,6 +118,7 @@ exports.index = function(req, res) {
 // Updates an existing checkin in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
+  if(req.body.__v) { delete req.body.__v; }
   User.findById(req.user.id, function (err, user) {
     if (err) { return handleError(res, err); }
     user.currRevel = req.body;
@@ -137,6 +137,26 @@ exports.update = function(req, res) {
     });
   });
 };
+
+
+exports.clearAllCheckins = function (req, res) {
+  var userId = req.user.id;
+  Revel.find({revelers: userId}, function (err, revels) {
+    revels.forEach(function (revel) {
+      var revelerIndex = revel.revelers.indexOf(userId)
+      if (err) { return handleError(res, err); }
+      if (revelerIndex >= 0) {
+        revel.revelers.splice(revelerIndex, 1);
+      }
+      revel.save(function (err) {
+        if (err) {return handleError(res, err); }
+      });
+    });
+  });
+  res.status(200).send('Checkins Cleared')
+}
+
+
 
 // Deletes a checkin from the DB.
 exports.destroy = function(req, res) {
