@@ -59,7 +59,8 @@ exports.search = function(req, res) {
         }
 
         if (req.user && targetRevel) {
-          var isReveling = targetRevel.revelers.indexOf(req.user._id) >= 0;
+          var userId = String(req.user._id);
+          var isReveling = targetRevel.revelers.indexOf(userId) >= 0;
         }
 
         if (targetRevel && isReveling) {     //  if exists in db & user checked in, 

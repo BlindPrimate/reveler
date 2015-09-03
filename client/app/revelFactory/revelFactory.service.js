@@ -42,15 +42,10 @@ angular.module('revelerApp')
 
     // get all revels
     revel.getRevels = function () {
-      var defer = $q.defer();
-      $http.get(baseUrl + 'search/' + $stateParams.searchTerm)
-        .success(function (res) {
-          defer.resolve(res);
-        })
-        .error(function (err, status) {
-          defer.reject(err);
+      return $http.get(baseUrl + 'search/' + $stateParams.searchTerm)
+        .then(function (response) {
+          return response.data;
         });
-      return defer.promise;
     }
 
     // get single revel 

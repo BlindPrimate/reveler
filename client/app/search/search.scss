@@ -2,6 +2,39 @@
   ul {
     li {
       list-style-type: none;
+      &:hover {
+        background: tint($light-blue, 70%);
+      }
     }
+  }
+  .title {
+    font-size: 1.4em;
+    color: tint($dark-blue, 20%);
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .basic-info, .review-count {
+    font-size: 1em;
+    font-weight: 300;
+    color: tint($dark-blue, 40%);
+    margin: 5px 0 10px 0;
+  }
+  .rating {
+    line-height: 2.5em;
+    font-size: 0.9em;
+    display: inline-block;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #B3D3F3;
+    margin-right: 12px;
+  }
+  .review-count {
+    margin: 15px 0 0 10px;
+  }
+  .snippet {
+    margin-top: 20px;
   }
 }

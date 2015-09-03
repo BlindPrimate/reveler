@@ -11,6 +11,10 @@ $open-sans: 'Open Sans', sans-serif;
 $oxygen: 'Oxygen', sans-serif;
 
 
+// color variables
+$light-blue: #eaf2f7;
+$dark-blue: #032742;
+
 /**
  * App-wide Styles
  */
@@ -22,10 +26,8 @@ html, body {
 }
 
 body {
-  font-size: 1em;
   font-family: $open-sans;
 }
-
 
 
 .state-wrapper, .page-wrapper {
@@ -35,9 +37,18 @@ body {
 
 .brand {
   font-family: $oxygen;
-  font-size: 3em;
+  font-size: 3.2em;
   letter-spacing: 0.05em;
 }
+
+.navbar-default .navbar-brand   {
+  color: $light-blue;
+}
+
+.navbar-default .navbar-nav li a {
+  color: $light-blue;
+}
+
 
 .browsehappy {
   margin: 0.2em 0;
@@ -47,16 +58,19 @@ body {
 }
 
 
+.navbar-default{
+  background: $dark-blue;
+}
+
 .user-nav {
   list-style-type: none;
-  color: black;
   padding-top: 15px;
   li {
     font-size: 1.2em;
-    border-left: 1px solid black;
+    border-left: 1px solid $light-blue;
     a {
       padding: 0 20px;
-      color: black;
+      color: $light-blue;
     }
     &:first-child {
       border-left: none;
@@ -71,9 +85,9 @@ body {
     color: black;
     width: 80%;
     height: 30px;
+    display: inline-block;
   }
   button {
-    width: 20%;
     height: 30px;
     color: black;
   }

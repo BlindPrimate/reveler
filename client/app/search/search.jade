@@ -2,19 +2,21 @@ div.page-wrapper#search-page
   div(ng-include="'components/navbar/navbar.html'")
   div.col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1.col-sm-10.col-sm-offset-1
     ul.container
-      li.revel(ng-repeat="revel in revels")
-        h3 
-          a(ng-href="{{revel.url}}"){{revel.name}}
-        h4 {{revel.location.display_address[0]}}
-        h5 {{revel.location.display_address[1]}}
-        p {{revel.phone}}
-        div
-          span {{revel.revelData.revelers.length}}
-        p(ng-if="revel.revelData.userCheckedIn") Checked In
-        p {{revel.revelData}}
-        button(ng-click="checkIn(revel.revelData)") 
-          span Check In
-          span Check Out
+      li.revel.clearfix.list-group-item(ng-repeat="revel in revels")
+        img.pull-right(ng-src="{{revel.image_url}}")
+        a.title(ng-href="{{revel.url}}"){{revel.name}}
+        p.basic-info {{revel.location.display_address[0]}}
+        div.rating.pull-left {{revel.rating}} 
+        p.review-count {{revel.review_count}} reviews
+        p.snippet {{revel.snippet_text}}
+        div.checkin.pull-right
+          p 
+            span {{revel.revelData.revelers.length}}
+            |  revelers
+          i.fa.fa-check(ng-show="revel.revelData.userCheckedIn")
+          button.btn.btn-default(ng-click="checkIn(revel.revelData)")
+            span(ng-if="!revel.revelData.userCheckedIn") Check In
+            span(ng-if="revel.revelData.userCheckedIn") Check Out
 
 
 
