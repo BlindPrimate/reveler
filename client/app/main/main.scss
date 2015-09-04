@@ -5,43 +5,70 @@
   background-image: url("/assets/images/night-table.jpg");
   background-color: #030E27;
   background-repeat: no-repeat;
-  color: white;
+  color: $light-blue;
   .navbar.navbar-default {
     background: transparent;
     padding-top: 50px;
     border: none;   
-    color: white;
+    color: $light-blue;
     li {
       padding: 0;
       a {
-        font-size: 1.2em;
+        font-size: 1em;
         color: white;
       }
     }
     li {
-      border-left: 1px solid white;
       &:first-child {
         border: none;
       }
     }
   }
   .brand {
-    font-size: 5em;
-    color: white;
+    font-size: 4em;
+    color: $light-blue;
   }
   #leader {
     margin-top: 80px;
     margin-bottom: 90px;
     text-align: center;
     font-family: $open-sans;
+    color: $light-blue;
     h1 {
-      font-size: 4em;
+      font-size: 3em;
       font-weight: 700;
       margin-bottom: 30px;
     }
     h2 {
-      font-size: 1.6em;
+      font-size: 1.4em;
       font-weight: 300;
+    }
+  }
+  search-form {
+  }
+}
+
+
+#main {
+  search-form {
+      background: rgba(25, 25, 35, 0.5);
+      border: 1px solid rgba(45, 45, 65, 0.6);
+      padding: 20px 20px;
+      display: block;
+    form {
+      margin: 0;
+      input {
+        outline: none;
+        border: none;
+        background: tint($dark-blue, 10%);
+        color: $light-blue;
+        padding-left: 10px;
+      }
+      button {
+        background: tint($dark-blue, 10%);
+        border: 1px solid tint($dark-blue, 20%);
+        color: $light-blue;
+      }
     }
   }
 }

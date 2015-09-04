@@ -1,4 +1,4 @@
-form.search-box(name="search" ng-submit="submit()")
-  input(type="text" name="term" placeholder="Enter Zip Code or City")
+form.search-box.form-search(name="searchForm" ng-submit="searchForm.$valid && submit()" novalidate)
+  input.input-append(type="text" name="term" ng-model="search" placeholder="Enter Zip Code or City" required)
   button.btn.btn-default(type="submit") Search
 

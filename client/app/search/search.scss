@@ -2,9 +2,11 @@
   ul {
     li {
       list-style-type: none;
-      &:hover {
-        background: tint($light-blue, 70%);
-      }
+    }
+  }
+  .revel {
+    &:hover {
+      background: tint($light-blue, 65%);
     }
   }
   .title {
@@ -12,13 +14,19 @@
     color: tint($dark-blue, 20%);
     &:hover {
       text-decoration: none;
+      color: tint($dark-blue, 50%);
     }
   }
   .basic-info, .review-count {
     font-size: 1em;
     font-weight: 300;
     color: tint($dark-blue, 40%);
-    margin: 5px 0 10px 0;
+  }
+  .basic-info {
+  }
+  .review-count {
+    font-size: 0.9em;
+    margin: 5px 0 30px 0;
   }
   .rating {
     line-height: 2.5em;
@@ -36,5 +44,6 @@
   }
   .snippet {
     margin-top: 20px;
+    font-size: 1.1em;
   }
 }

@@ -9,8 +9,10 @@ angular.module('revelerApp')
 
       },
       controller: function ($scope, $state) {
+        $scope.search = $state.params.searchTerm;
+
         $scope.submit = function () {
-          $state.go('search', {searchTerm: search.term.value});
+          $state.go('search', {searchTerm: $scope.search});
         }
       }
     };

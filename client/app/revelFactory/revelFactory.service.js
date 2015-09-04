@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('revelerApp')
-  .factory('Revel', function ($q, $http, $stateParams, Auth) {
+  .factory('Revel', function ($q, $http, $stateParams, Auth, Modal) {
     // Service logic
     // ... 
 
@@ -77,6 +77,9 @@ angular.module('revelerApp')
             });
           });
       } else {
+        Modal.confirm.delete('check', function (test) {
+          console.log(test);
+        });
         revelObj.revelers.splice(userIdIndex, 1);
         revelObj.userCheckedIn = false;
         return clearUserCheckins(revelObjList).then(function (newRevels) {

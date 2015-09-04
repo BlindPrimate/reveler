@@ -20,15 +20,24 @@ $dark-blue: #032742;
  */
 
 
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+  }
+
+
 html, body {
   height: 100%;
   min-height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
   font-family: $open-sans;
 }
-
 
 .state-wrapper, .page-wrapper {
   height: 100%;
@@ -43,10 +52,20 @@ body {
 
 .navbar-default .navbar-brand   {
   color: $light-blue;
+  &:hover {
+    color: white;
+    background: transparent;
+  }
 }
 
-.navbar-default .navbar-nav li a {
-  color: $light-blue;
+.navbar-default .navbar-nav li {
+  a {
+    color: $light-blue;
+    &:hover {
+      color: white;
+      background: transparent;
+    }
+  }
 }
 
 
@@ -67,9 +86,9 @@ body {
   padding-top: 15px;
   li {
     font-size: 1.2em;
-    border-left: 1px solid $light-blue;
+    border-left: 1px solid shade($light-blue, 30%);
     a {
-      padding: 0 20px;
+      padding: 0 30px;
       color: $light-blue;
     }
     &:first-child {
@@ -79,19 +98,8 @@ body {
 }
 
 
-.search-box {
-  margin-top: 10px;
-  input {
-    color: black;
-    width: 80%;
-    height: 30px;
-    display: inline-block;
-  }
-  button {
-    height: 30px;
-    color: black;
-  }
-}
+
+
 
 
 

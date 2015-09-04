@@ -9,12 +9,12 @@ div.page-wrapper#search-page
         div.rating.pull-left {{revel.rating}} 
         p.review-count {{revel.review_count}} reviews
         p.snippet {{revel.snippet_text}}
-        div.checkin.pull-right
+        div.checkin
           p 
             span {{revel.revelData.revelers.length}}
             |  revelers
           i.fa.fa-check(ng-show="revel.revelData.userCheckedIn")
-          button.btn.btn-default(ng-click="checkIn(revel.revelData)")
+          button.btn.btn-default(ng-click="checkIn(revel.revelData)" ng-show="isLoggedIn")
             span(ng-if="!revel.revelData.userCheckedIn") Check In
             span(ng-if="revel.revelData.userCheckedIn") Check Out
 
