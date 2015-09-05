@@ -4,9 +4,16 @@
       list-style-type: none;
     }
   }
+  .navbar.navbar-default {
+    padding: 0;
+  }
+  #revels {
+    margin-top: 30px;
+  }
   .revel {
+    background: $light-blue;
     &:hover {
-      background: tint($light-blue, 65%);
+      background: tint($light-blue, 35%);
     }
   }
   .title {
@@ -46,4 +53,23 @@
     margin-top: 20px;
     font-size: 1.1em;
   }
+  .checkin {
+    border-top: 1px solid shade($light-blue, 2%);
+    padding: 20px 0 10px 20px;
+    p {
+      display: inline;
+    }
+    i {
+      font-size: 1.4em;
+      color: #AAA;
+    }
+    button {
+      margin-left: 30px;
+    }
+    .checked-in {
+      color: shade($green, 20%);
+    }
+  }
 }
+
+

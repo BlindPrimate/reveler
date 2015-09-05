@@ -14,6 +14,7 @@ $oxygen: 'Oxygen', sans-serif;
 // color variables
 $light-blue: #eaf2f7;
 $dark-blue: #032742;
+$green: #1BBA9A;
 
 /**
  * App-wide Styles
@@ -37,6 +38,7 @@ html, body {
 
 body {
   font-family: $open-sans;
+  background: desaturate($dark-blue, 20%);
 }
 
 .state-wrapper, .page-wrapper {
@@ -46,26 +48,8 @@ body {
 
 .brand {
   font-family: $oxygen;
-  font-size: 3.2em;
+  font-size: 2.8em;
   letter-spacing: 0.05em;
-}
-
-.navbar-default .navbar-brand   {
-  color: $light-blue;
-  &:hover {
-    color: white;
-    background: transparent;
-  }
-}
-
-.navbar-default .navbar-nav li {
-  a {
-    color: $light-blue;
-    &:hover {
-      color: white;
-      background: transparent;
-    }
-  }
 }
 
 
@@ -76,10 +60,28 @@ body {
   padding: 0.2em 0;
 }
 
+.navbar.navbar-default {
+  background: $light-blue;
+  padding-top: 30px;
+  border: none;   
+  color: $light-blue;
+  li {
+    padding: 0;
+    &:first-child {
+      border: none;
+    }
+    a {
+      font-size: 0.8em;
+      color: $dark-blue;
+    }
+  }
+  .brand {
+    color: $dark-blue;
+  }
+} 
 
-.navbar-default{
-  background: $dark-blue;
-}
+
+
 
 .user-nav {
   list-style-type: none;

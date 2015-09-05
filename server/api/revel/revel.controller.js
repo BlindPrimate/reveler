@@ -158,7 +158,6 @@ exports.clearAllCheckins = function (req, res) {
 }
 
 
-
 // Deletes a checkin from the DB.
 exports.destroy = function(req, res) {
   Revel.findById(req.params.id, function (err, revel) {

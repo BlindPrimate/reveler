@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('revelerApp')
-  .factory('Revel', function ($q, $http, $stateParams, Auth, Modal) {
+  .factory('Revel', function ($q, $http, $stateParams, Auth, Modal, Location) {
     // Service logic
     // ... 
 
@@ -87,7 +87,6 @@ angular.module('revelerApp')
         });
       }
     }
-
 
 return revel;
 

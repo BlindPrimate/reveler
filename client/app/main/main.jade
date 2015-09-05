@@ -1,11 +1,12 @@
 div.page-wrapper#main
+  nav(ng-include="'components/navbar/navbar.html'")
   div#banner.clearfix
-    div(ng-include="'components/navbar/navbar.html'")
     div.col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3.col-sm-6.col-sm-offset-3
       div#leader
         h1 Come and join us.  
         h2 Your friends are waiting. 
-        a(href="/search/44095") SEARCH
-      search-form
-div(ng-include="'components/footer/footer.html'")
+      div#search
+        search-form
+  div#sub-footer
+footer(ng-include="'components/footer/footer.html'")
 

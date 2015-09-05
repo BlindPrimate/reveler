@@ -1,7 +1,7 @@
 div.page-wrapper#search-page
-  div(ng-include="'components/navbar/navbar.html'")
-  div.col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1.col-sm-10.col-sm-offset-1
-    ul.container
+  nav(ng-include="'components/navbar/navbar.html'")
+  div.col-lg-10.col-lg-offset-1.col-md-12.col-sm-12
+    ul.container#revels
       li.revel.clearfix.list-group-item(ng-repeat="revel in revels")
         img.pull-right(ng-src="{{revel.image_url}}")
         a.title(ng-href="{{revel.url}}"){{revel.name}}
@@ -10,10 +10,9 @@ div.page-wrapper#search-page
         p.review-count {{revel.review_count}} reviews
         p.snippet {{revel.snippet_text}}
         div.checkin
-          p 
-            span {{revel.revelData.revelers.length}}
-            |  revelers
-          i.fa.fa-check(ng-show="revel.revelData.userCheckedIn")
+          p
+            i.fa.fa-flag(ng-class="{'checked-in': revel.revelData.userCheckedIn}")
+            span &nbsp; &nbsp; {{revel.revelData.revelers.length}} revelers
           button.btn.btn-default(ng-click="checkIn(revel.revelData)" ng-show="isLoggedIn")
             span(ng-if="!revel.revelData.userCheckedIn") Check In
             span(ng-if="revel.revelData.userCheckedIn") Check Out

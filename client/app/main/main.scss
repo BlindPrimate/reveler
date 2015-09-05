@@ -1,33 +1,13 @@
 
 #banner {
   width: 100%;
-  height: 100%;;
-  background-image: url("/assets/images/night-table.jpg");
-  background-color: #030E27;
+  height: 464px;
+  padding-top: 25px;
+  background-image: url("/assets/images/night-table-2.jpg");
+  background-color: $light-blue;
   background-repeat: no-repeat;
   color: $light-blue;
-  .navbar.navbar-default {
-    background: transparent;
-    padding-top: 50px;
-    border: none;   
-    color: $light-blue;
-    li {
-      padding: 0;
-      a {
-        font-size: 1em;
-        color: white;
-      }
-    }
-    li {
-      &:first-child {
-        border: none;
-      }
-    }
-  }
-  .brand {
-    font-size: 4em;
-    color: $light-blue;
-  }
+  position: relative;
   #leader {
     margin-top: 80px;
     margin-bottom: 90px;
@@ -44,36 +24,45 @@
       font-weight: 300;
     }
   }
-  search-form {
-  }
+}
+
+#main .navbar.navbar-default {
+  margin: 0;
+  padding-bottom: 10px;
 }
 
 
-#main {
-  search-form {
-      background: rgba(25, 25, 35, 0.5);
-      border: 1px solid rgba(45, 45, 65, 0.6);
-      padding: 20px 20px;
-      display: block;
-    form {
-      margin: 0;
-      input {
-        outline: none;
-        border: none;
-        background: tint($dark-blue, 10%);
-        color: $light-blue;
-        padding-left: 10px;
-      }
-      button {
-        background: tint($dark-blue, 10%);
-        border: 1px solid tint($dark-blue, 20%);
-        color: $light-blue;
-      }
+
+#search {
+  background: rgba($light-blue, 0.9);
+  margin-bottom: 30px;
+  border-radius: 3px;
+}
+
+
+search-form {
+  padding: 10px 20px;
+  display: block;
+  form {
+    margin: 0;
+    input {
+      outline: none;
+      border: none;
+      color: $dark-blue;
+      padding-left: 10px;
+    }
+    button {
+      background: tint($dark-blue, 10%);
+      color: $light-blue;
     }
   }
 }
 
 
+#sub-footer {
+  height: 100%;
+  background: $light-blue;
+}
 
 
 

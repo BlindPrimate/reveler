@@ -13,7 +13,7 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
       ul.nav.navbar-nav
         li(ng-show='isAdmin()', ng-class='{active: isActive("/admin")}')
           a(href='/admin') Admin
-      search-form.col-lg-4.col-md-4.col-sm-4(ng-if='!isActive("/")')
+      search-form.col-lg-6.col-md-5.col-sm-5(ng-if='!isActive("/")')
 
       ul.nav.navbar-nav.navbar-right.user-nav
         li(ng-if='!isLoggedIn()', ng-class='{active: isActive("/signup")}')
