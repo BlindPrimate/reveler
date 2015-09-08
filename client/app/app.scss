@@ -20,17 +20,23 @@ $green: #1BBA9A;
  * App-wide Styles
  */
 
+* {
+  margin: 0;
+}
+
+*:focus {
+  outline: 0;
+}
 
 *, *:before, *:after {
   -webkit-box-sizing: inherit;
   -moz-box-sizing: inherit;
   box-sizing: inherit;
-  }
+}
 
 
 html, body {
   height: 100%;
-  min-height: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -38,18 +44,50 @@ html, body {
 
 body {
   font-family: $open-sans;
-  background: desaturate($dark-blue, 20%);
 }
 
-.state-wrapper, .page-wrapper {
+.state-wrapper {
   height: 100%;
+}
+
+.page-wrapper {
   min-height: 100%;
+}
+
+.page-wrapper:after {
+  content: "";
+  display: block;
+  margin-bottom: -50px;
+}
+
+.footer, .page-wrapper:after {
+  height: 50px;
 }
 
 .brand {
   font-family: $oxygen;
   font-size: 2.8em;
   letter-spacing: 0.05em;
+}
+
+
+.loading-screen {
+  margin: 75px auto;
+  padding: 30px;
+  width: 400px;
+  text-align: center;
+  background: $light-blue;
+  display: block;
+  border-radius: 4px;
+  i {
+    color: $dark-blue;
+    font-size: 5em;
+    margin-bottom: 40px;
+  }
+  p {
+    font-size: 1.2em;
+    font-weight: 300;
+  }
 }
 
 
@@ -62,7 +100,6 @@ body {
 
 .navbar.navbar-default {
   background: $light-blue;
-  padding-top: 30px;
   border: none;   
   color: $light-blue;
   li {
@@ -72,20 +109,56 @@ body {
     }
     a {
       font-size: 0.8em;
-      color: $dark-blue;
+      color: tint($dark-blue, 40%);
     }
   }
   .brand {
     color: $dark-blue;
   }
+  .active a {
+    background: transparent;
+    &:hover, &:focus {
+      color: black;
+      background: transparent;
+    }
+  }
 } 
+
+
+
+.footer {
+  background: shade($light-blue, 5%);
+  padding-top: 8px;
+  width: 100%;
+  ul {
+    margin: 0 auto;
+    li {
+      display: inline;
+      list-style-type: none;
+      margin: 0 10px;
+      a {
+        padding: 5px 10px;
+      }
+    }
+  }
+  .footer-links {
+    display: table;
+    margin: 8px auto;
+  }
+  .social-media-links {
+    margin-top: -30px;
+    font-size: 1.5em;
+    display: inline-block;
+    float: right;
+  }
+}
 
 
 
 
 .user-nav {
   list-style-type: none;
-  padding-top: 15px;
+  padding-top: 22px;
   li {
     font-size: 1.2em;
     border-left: 1px solid shade($light-blue, 30%);

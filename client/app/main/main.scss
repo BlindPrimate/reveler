@@ -4,8 +4,9 @@
   height: 464px;
   padding-top: 25px;
   background-image: url("/assets/images/night-table-2.jpg");
-  background-color: $light-blue;
+  background-color: shade($dark-blue, 70%);
   background-repeat: no-repeat;
+  background-position: center;
   color: $light-blue;
   position: relative;
   #leader {
@@ -26,9 +27,15 @@
   }
 }
 
-#main .navbar.navbar-default {
-  margin: 0;
-  padding-bottom: 10px;
+#main {
+  .navbar.navbar-default {
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 10px;
+  }
+  .user-nav {
+    padding-top: 27px;
+  }
 }
 
 
@@ -60,7 +67,7 @@ search-form {
 
 
 #sub-footer {
-  height: 100%;
+  height: 600px;
   background: $light-blue;
 }
 

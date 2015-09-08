@@ -1,4 +1,5 @@
 #search-page {
+  background: shade($dark-blue, 20%);
   ul {
     li {
       list-style-type: none;
@@ -8,7 +9,8 @@
     padding: 0;
   }
   #revels {
-    margin-top: 30px;
+    margin-top: 15px;
+    padding: 0;
   }
   .revel {
     background: $light-blue;
@@ -25,7 +27,7 @@
     }
   }
   .basic-info, .review-count {
-    font-size: 1em;
+    font-size: 0.95em;
     font-weight: 300;
     color: tint($dark-blue, 40%);
   }
@@ -51,23 +53,41 @@
   }
   .snippet {
     margin-top: 20px;
-    font-size: 1.1em;
+    font-size: 1em;
   }
   .checkin {
     border-top: 1px solid shade($light-blue, 2%);
-    padding: 20px 0 10px 20px;
+    padding: 20px 0 10px 0;
     p {
       display: inline;
     }
     i {
       font-size: 1.4em;
-      color: #AAA;
+      color: #BBB;
     }
     button {
-      margin-left: 30px;
+      margin-left: 5%;
+      background: tint($light-blue, 20%);
+      border: 1px solid shade($light-blue, 25%);
+      border-radius: 3px;
+      padding: 1px 5px;
+      &:hover {
+        background: white;
+      }
     }
     .checked-in {
-      color: shade($green, 20%);
+      color: $green;
+      border: 1px solid $green;
+      display: inline-block;
+      margin-left: 5%;
+      i {
+        font-size: 1.2em;
+        color: $green;
+      }
+    }
+    .cancel {
+      font-size: 0.8em;
+      margin-left: 1%;
     }
   }
 }
