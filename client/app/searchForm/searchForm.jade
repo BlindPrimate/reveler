@@ -1,6 +1,6 @@
-form.search-box.form-search(name="searchForm" ng-submit="searchForm.$valid && submit()" novalidate)
-  div#inner-wrapper
-    input.input-append(type="text" name="term" ng-model="search" placeholder="Enter Zip Code or City" required)
+form.search-box.form-search.clearfix(name="searchForm" ng-submit="searchForm.$valid && submit()" novalidate)
+  div#inner-wrapper.col-lg-10.col-md-8.col-sm-9.col-xs-12
+    input(type="text" name="term" ng-model="search" placeholder="Enter Zip Code or City" required)
     i.fa.fa-location-arrow(ng-click="setToLocation()")
-  button(type="submit") Search
+  button.col-lg-2.col-md-4.col-sm-3.col-xs-12(type="submit") Search
 

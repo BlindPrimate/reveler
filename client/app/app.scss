@@ -128,9 +128,13 @@ body {
 
 .footer {
   background: shade($light-blue, 5%);
-  padding-top: 8px;
+  padding-top: 5px;
   width: 100%;
+  .container {
+    padding-top: 10px;
+  }
   ul {
+    display: table;
     margin: 0 auto;
     li {
       display: inline;
@@ -140,16 +144,6 @@ body {
         padding: 5px 10px;
       }
     }
-  }
-  .footer-links {
-    display: table;
-    margin: 8px auto;
-  }
-  .social-media-links {
-    margin-top: -30px;
-    font-size: 1.5em;
-    display: inline-block;
-    float: right;
   }
 }
 

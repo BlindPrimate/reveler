@@ -1,12 +1,40 @@
 div.page-wrapper#main
   nav(ng-include="'components/navbar/navbar.html'")
   div#banner.clearfix
-    div.col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3.col-sm-6.col-sm-offset-3
+    div.col-lg-4.col-lg-offset-4.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2.col-xs-12
       div#leader
         h1 Come and join us.  
         h2 Your friends are waiting. 
       div#search
         search-form
-  div#sub-footer
+
+  div#marketing.clearfix
+    div.container.col-lg-12.col-md-12.col-sm-12
+      div#marketing-header
+        h3 Planning a night out?
+        h4 We can help.
+
+
+      div#features.col-lg-6.col-lg-offset-3.col-md-8.col-md-offset-2.col-sm-12
+        div.col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1.col-sm-12
+          div.marketing-block
+            i.fa.fa-glass.center-block
+            h4 Search for local hotspots
+            p Find the best local bars & restaraunts to suit any mood or desire.
+          i.fa.fa-arrow-down.arrow
+          div.marketing-block
+            i.fa.fa-users
+            h4 Connect to your friends
+            p Find out where your friends are going tonight.
+          i.fa.fa-arrow-down.arrow
+          div.marketing-block
+            i.fa.fa-check
+            h4 Check In 
+            p Let everyone know where you'll be going tonight.
+          i.fa.fa-arrow-down.arrow
+          div.marketing-block
+            i.fa.fa-flag
+            h4 Revel
+            p Better get to the party.
 footer(ng-include="'components/footer/footer.html'")
 

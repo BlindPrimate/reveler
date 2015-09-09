@@ -40,6 +40,8 @@
 
 
 
+
+
 #search {
   background: rgba($light-blue, 0.9);
   margin-bottom: 30px;
@@ -66,10 +68,63 @@ search-form {
 }
 
 
-#sub-footer {
-  height: 600px;
+#marketing {
   background: $light-blue;
+  #marketing-header {
+    text-align: center;
+    padding: 60px 0;
+    h3 {
+      font-size: 2em;
+    }
+    h4 {
+      margin-top: 30px;
+      font-weight: 300;
+      font-size: 1.5em;
+    }
+  }
 }
+
+
+#features {
+  padding: 100px 0;
+  font-weight: 300;
+  font-size: 1.5em;
+  border-top: 1px solid shade($light-blue, 10%);
+}
+
+
+.arrow {
+  position: relative;
+  color: shade($light-blue, 30%);
+  display: table;
+  border: none;
+  margin: 60px auto;
+}
+
+
+.marketing-block {
+  position: relative;
+  padding-left: 90px;
+  h4 {
+    font-size: 1.15em;
+  }
+  i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    display: table;
+    background: shade($light-blue, 2%);
+    border: 1px solid shade($light-blue, 10%);
+    border-radius: 50%;
+    color: shade($light-blue, 20%);
+  }
+  i.fa {
+    color: tint($dark-blue, 40%);
+  }
+}
+
+
 
 
 
