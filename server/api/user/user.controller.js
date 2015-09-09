@@ -80,6 +80,11 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
+
+
+/*
+ * Change current check-in in user db entry
+ */
 exports.changeCurrentCheckIn = function (req, res, next) {
   var userId = req.user._id;
   var revelId = req.params.revelId;

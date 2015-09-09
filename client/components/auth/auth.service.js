@@ -142,6 +142,9 @@ angular.module('revelerApp')
       getToken: function() {
         return $cookieStore.get('token');
       },
+      /**
+       * Change current revel check-in in user db entry
+       */
       changeCurrUserRevel: function (revelObj) {
         var userId = currentUser._id;
         var currUserRevel = currentUser.currRevel;

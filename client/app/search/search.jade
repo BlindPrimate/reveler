@@ -1,9 +1,12 @@
 div.page-wrapper#search-page
   nav(ng-include="'components/navbar/navbar.html'")
   div.clearfix
-    div.loading-screen.block-center(ng-show="!revels")
-      i.fa.fa-circle-o-notch.fa-spin
-      p Loading Revels...
+    div.container.col-lg-4.col-md-4.col-sm-4.col-lg-offset-4.col-md-offset-4.col-sm-offset-4
+      div.loading-screen.block-center(ng-show="!revels")
+        i.fa.fa-circle-o-notch.fa-spin
+        p Loading Revels...
+      div.error.block-center(ng-show="loadError") Error Loading Revels
+      div.error.block-center(ng-show="(revels.length < 1)") Oops!  Your search didn't turn up any results.  Please try a different search.
     ul.col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1.col-sm-12#revels
       li.revel.clearfix.list-group-item(ng-repeat="revel in revels")
         img.pull-right(ng-src="{{revel.image_url}}")

@@ -45,39 +45,3 @@ Revel.find({}).remove(function () {
     };
 })
 
-
-
-
-//User.find({}).remove(function() {
-  //User.create({
-    //provider: 'local',
-    //name: 'Test User',
-    //email: 'test@test.com',
-    //password: 'test',
-    //currRevel: ''
-  //}, {
-    //provider: 'local',
-    //role: 'admin',
-    //name: 'Admin',
-    //email: 'admin@admin.com',
-    //password: 'admin'
-  //}, function() {
-      //console.log('finished populating users');
-    //}
-  //);
-//});
-
-//Revel.find({}).remove(function () {
-  //Revel.create({
-      //revel_id: "the-captains-club-eastlake",
-      //revelers: []
-    //} , {
-      //revel_id: "the-wild-goose-willoughby",
-      //revelers: []
-    //}
-    //), function() {
-      //console.log('finished populating revels');
-    //};
-//})
-
-

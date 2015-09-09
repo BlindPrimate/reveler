@@ -9,6 +9,12 @@ module.exports = {
   DOMAIN:           'http://localhost:9000',
   SESSION_SECRET:   'reveler-secret',
 
+  YELP_CONSUMER : '', 
+  YELP_OAUTH_TOKEN : '', 
+  YELP_CONSUMER_SECRET : '', 
+  YELP_TOKEN_SECRET : '',
+
+
   FACEBOOK_ID:      'app-id',
   FACEBOOK_SECRET:  'secret',
 

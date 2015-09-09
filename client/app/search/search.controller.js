@@ -9,6 +9,8 @@ angular.module('revelerApp')
       $scope.isLoggedIn = Auth.isLoggedIn();
       Revel.getRevels().then(function(res) {
         $scope.revels = res;
+      }, function (err) {
+        $scope.loadError = true;
       });
     }
 

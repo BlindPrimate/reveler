@@ -8,18 +8,21 @@ angular.module('revelerApp')
     var revel = this;
     var baseUrl = 'api/revels/'
 
+    // checks current logged-in user into revel 
     var checkin = function (revelObj) {
-      if (revelObj._id) {
+      if (revelObj._id) {    // update if revel currently exists in db
         return $http.put(baseUrl + revelObj._id, revelObj).then(function (response) {
           return response.data;
         });
-      } else {
+      } else {    // create revel if none exists in db
         return $http.post(baseUrl, revelObj).then(function (response) {
           return response.data;
         });
       }
     }
 
+
+    // clear all checkins of current logged-in user
     var clearUserCheckins = function (revels) {
       var defer = $q.defer();
       var currUsr = Auth.getCurrentUser()._id;
@@ -36,7 +39,6 @@ angular.module('revelerApp')
       return $http.delete(baseUrl + 'clearAll').then(function () {
         return revels;
       });
-      
     }
 
 
@@ -47,6 +49,7 @@ angular.module('revelerApp')
           return response.data;
         });
     }
+
 
     // get single revel 
     revel.getRevel = function (revelId) {
@@ -67,6 +70,8 @@ angular.module('revelerApp')
       var userIdIndex = revelObj.revelers.indexOf(currUsr);
       var revelId = revelObj._id || '';
 
+
+      // user not currently checked in  -- check user in
       if (userIdIndex === -1) {
         return clearUserCheckins(revelObjList)
           .then(function () {
@@ -76,10 +81,7 @@ angular.module('revelerApp')
               return newRevel;
             });
           });
-      } else {
-        Modal.confirm.delete('check', function (test) {
-          console.log(test);
-        });
+      } else {  // user checked in -- removes checkin
         revelObj.revelers.splice(userIdIndex, 1);
         revelObj.userCheckedIn = false;
         return clearUserCheckins(revelObjList).then(function (newRevels) {
@@ -88,6 +90,6 @@ angular.module('revelerApp')
       }
     }
 
-return revel;
+  return revel;
 
   });
