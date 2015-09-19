@@ -6,7 +6,7 @@ A MEAN-fullstack web application developed to allow users to find local bars & r
 
 Initial scaffolding of the app accomplished with [angular-fullstack constructor](https://github.com/DaftMonk/generator-angular-fullstack).
 
-##### Check out the [Live Demo](https://revler.herokuapp.com/)
+##### Check out the [Live Demo](https://reveler.herokuapp.com/)
 
 
 #### Setup
