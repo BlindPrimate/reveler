@@ -61,7 +61,7 @@ body {
 }
 
 .footer, .page-wrapper:after {
-  height: 50px;
+  min-height: 50px;
 }
 
 .brand {
@@ -72,12 +72,9 @@ body {
 
 
 .loading-screen {
-  margin: 75px auto;
   padding: 30px;
-  width: 400px;
   text-align: center;
   background: $light-blue;
-  display: block;
   border-radius: 4px;
   i {
     color: $dark-blue;
@@ -127,21 +124,18 @@ body {
 
 
 .footer {
+  border-top: 1px solid shade($light-blue, 12%);
   background: shade($light-blue, 5%);
-  padding-top: 5px;
   width: 100%;
-  .container {
-    padding-top: 10px;
-  }
   ul {
     display: table;
-    margin: 0 auto;
+    margin: 5px auto 0;
     li {
-      display: inline;
+      float: left;
       list-style-type: none;
-      margin: 0 10px;
+      margin: 10px 10px;
       a {
-        padding: 5px 10px;
+        padding: 10px 30px;
       }
     }
   }
@@ -152,12 +146,12 @@ body {
 
 .user-nav {
   list-style-type: none;
-  padding-top: 22px;
+  padding-top: 25px;
   li {
     font-size: 1.2em;
     border-left: 1px solid shade($light-blue, 30%);
     a {
-      padding: 0 30px;
+      padding: 0 40px;
       color: $light-blue;
     }
     &:first-child {
